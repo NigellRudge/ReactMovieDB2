@@ -12,23 +12,22 @@ export default class ShowsHomePage extends React.Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         let service = new ShowService();
-        service.getNowAiringShows()
-                .then(response => {
-                    this.setState({
-                        nowAiringShows: response.data.results
-
-                    })
-                    console.log(this.state.nowAiringShows)
+        await service.getNowAiringShows()
+            .then(result => {
+                this.setState({
+                    nowAiringShows: result
+                })
+                console.log(this.state.nowAiringShows)
         });
-        service.getTopRatedShows()
-                .then(response => {
-                    this.setState({
-                        topRatedShows: response.data.results,
-                        loading: false
-                    });
-                    console.log(this.state.topRatedShows)
+        await service.getTopRatedShows()
+            .then(result => {
+                this.setState({
+                    topRatedShows: result,
+                    loading: false
+                });
+                console.log(this.state.topRatedShows)
         });
     }
 
@@ -45,7 +44,7 @@ export default class ShowsHomePage extends React.Component {
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                                 {this.state.nowAiringShows.map((show,key) =>{
-                                        return <ShowCard show={show} key={key}></ShowCard>
+                                        return <ShowCard show={show} key={key} />
                                     }
                                  )}
                             </div>
@@ -58,7 +57,7 @@ export default class ShowsHomePage extends React.Component {
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                                 {this.state.topRatedShows.map((show,key) =>{
-                                        return <ShowCard show={show} key={key}></ShowCard>
+                                        return <ShowCard show={show} key={key} />
                                     }
                                  )}
                             </div>

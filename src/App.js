@@ -8,6 +8,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import MovieService from "./services/MovieService";
+import ActorHomePage from "./pages/ActorHomePage";
 
 class App extends  React.Component{
   constructor() {
@@ -17,6 +19,7 @@ class App extends  React.Component{
     }
   }
   componentDidMount(){
+
   }
   render(){
     return (
@@ -29,6 +32,9 @@ class App extends  React.Component{
             <Route path="/shows">
                 <ShowsHomePage/>
             </Route>
+           <Route path="/actors">
+               <ActorHomePage/>
+           </Route>
            <Route path="/">
                 <MovieHomePage/>
            </Route>

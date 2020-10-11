@@ -24,7 +24,7 @@ export default class MenuComponent extends React.Component {
                         <Link to="/shows" className="hover:text-gray-300">TV Shows</Link>
                     </li>
                     <li className="md:ml-6 mt-3 md:mt-0">
-                    <a href="#" className="hover:text-gray-300">Actors</a>
+                        <Link to="/actors" className="hover:text-gray-300">Actors</Link>
                     </li>
                  </ul>
                  <div className="flex items-center">

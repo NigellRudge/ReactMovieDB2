@@ -1,15 +1,18 @@
 import React from 'react';
+import {media_url} from '../utils/config';
 
-const ShowCard = function(props) {
+const MovieCard = function (props){
+    let length = props.movie.genre_ids.length >= 3 ? 3: props.movie.genre_ids.length
+    props.movie.genre_ids = props.movie.genre_ids.slice(0,length);
     return (
         <div className="mt-8">
             <a href="#">
-                <img src={props.show.poster_path} alt="picture"
+                <img src={props.movie.poster_path} alt="picture"
                      className="hover:opacity-75 transition ease-in-out duration-150" />
             </a>
             <div className="mt-2">
                 <a href="#"
-                   className="text-lg mt-2 hover:text-gray-300">{props.show.title}</a>
+                   className="text-lg mt-2 hover:text-gray-300">{props.movie.title}</a>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">
@@ -18,15 +21,23 @@ const ShowCard = function(props) {
                                 data-name="star"/>
                         </g>
                     </svg>
-                    <span className="ml-1">{ props.show.vote_average} %</span>
+                    <span className="ml-1">{ props.movie.vote_average} %</span>
                     <span className="mx-2">|</span>
-                    <span>{ props.show.date} </span>
+                    <span>{props.movie.date} </span>
                 </div>
                 <div className="text-gray-400 text-sm">
-                    <span className="ml-1">Action, Adventure</span>
+                    {props.movie.genre_ids.map((item,key) => {
+                        if(props.movie.genre_ids[key+1]){
+                            return <span key={key}>{item.name}, </span>
+                        }
+                        else{
+                            return <span key={key}>{item.name} </span>
+                        }
+                    })}
                 </div>
             </div>
         </div>
     );
 }
-export default ShowCard;
+export default MovieCard;
+
