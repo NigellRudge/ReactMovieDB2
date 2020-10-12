@@ -1,18 +1,17 @@
 import React from 'react';
-import {media_url} from '../utils/config';
+import {Link} from 'react-router-dom';
 
 const MovieCard = function (props){
     let length = props.movie.genre_ids.length >= 3 ? 3: props.movie.genre_ids.length
+    let url = `/movie/${props.movie.id}`;
     props.movie.genre_ids = props.movie.genre_ids.slice(0,length);
     return (
         <div className="mt-8">
-            <a href="#">
-                <img src={props.movie.poster_path} alt="picture"
-                     className="hover:opacity-75 transition ease-in-out duration-150" />
-            </a>
+            <Link to={url}>
+                <img src={props.movie.poster_path} alt="picture" className="hover:opacity-75 transition ease-in-out duration-150" />
+            </Link>
             <div className="mt-2">
-                <a href="#"
-                   className="text-lg mt-2 hover:text-gray-300">{props.movie.title}</a>
+                <Link to={url} className="text-lg mt-2 hover:text-gray-300">{props.movie.title}</Link>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">

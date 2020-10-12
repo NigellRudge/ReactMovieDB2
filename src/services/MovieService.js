@@ -1,9 +1,14 @@
 import {api_key, base_url, media_url} from '../utils/config';
 import axios from 'axios';
-import {appendUrlToPoster, populateGenreArray} from "../utils/functions";
+import {appendMediaurlToImages, appendUrlToPoster, populateGenreArray} from "../utils/functions";
 
 class MovieService {
-
+    constructor() {
+        this.genres = []
+        this.getMovieGenres().then(result => {
+            this.genres = result
+        })
+    }
      async getPopularMovies(page = 1){
         let url =`${base_url}movie/popular`;
         let params = {
@@ -14,12 +19,9 @@ class MovieService {
         return await axios.get(url,{params:params})
             .then(response => {
                 response.data.results = appendUrlToPoster(response.data.results,media_url);
-
-                this.getMovieGenres().then(genre_array =>{
                     response.data.results.map((item,key) => {
-                        item.genre_ids = populateGenreArray(item.genre_ids,genre_array)
+                        item.genre_ids = populateGenreArray(item.genre_ids,this.genres)
                     })
-                })
                 return response.data.results;
             })
             .catch(error => {
@@ -37,11 +39,8 @@ class MovieService {
         return await axios.get(url,{params:params})
             .then(response => {
                 response.data.results = appendUrlToPoster(response.data.results,media_url);
-
-                this.getMovieGenres().then(genre_array =>{
-                    response.data.results.map((item,key) => {
-                        item.genre_ids = populateGenreArray(item.genre_ids,genre_array)
-                    })
+                response.data.results.map((item,key) => {
+                    item.genre_ids = populateGenreArray(item.genre_ids,this.genres)
                 })
                 return response.data.results;
             })
@@ -50,7 +49,7 @@ class MovieService {
             })
     }
 
-     async GetMovie(movieId){
+     async getMovieInfo(movieId){
         let url = `${base_url}movie/${movieId}`;
         let params = {
             api_key:api_key,
@@ -59,8 +58,13 @@ class MovieService {
         return await axios.get(url,{params:params })
                 .then(response => {
                         response.data.backdrop_path = `${media_url}${response.data.backdrop_path}`;
-                        response.data.poster_path = `${media_url}${response.data.poster_path};`
-                        return response.data
+                        response.data.poster_path = `${media_url}${response.data.poster_path}`;
+                        response.data.images.backdrops = appendMediaurlToImages(response.data.images.backdrops,'file_path')
+                        response.data.images.posters = appendMediaurlToImages(response.data.images.posters,'file_path')
+                        response.data.credits.cast = appendMediaurlToImages(response.data.credits.cast,'profile_path')
+                    console.log(response.data);
+                    return response.data
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -87,7 +91,6 @@ class MovieService {
 
      async getMovieGenres(){
          let url = `${base_url}genre/movie/list`;
-         console.log(url)
          let params = {
              api_key:api_key
          }

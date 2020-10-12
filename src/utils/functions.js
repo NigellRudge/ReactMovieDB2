@@ -1,3 +1,4 @@
+import {media_url} from "./config";
 
 
 const appendUrlToPoster = function(inputArray, url){
@@ -42,4 +43,13 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
     }
     return outputArrray;
 }
-export {appendUrlToPoster,appendUrlToProfile,getGenreString,populateGenreArray };
+
+const appendMediaurlToImages = function(inputArray,property){
+    let outputArray = [];
+    for(var i =0; i< inputArray.length; i++){
+        inputArray[i][property] = `${media_url}${inputArray[i][property]}`;
+        outputArray.push(inputArray[i]);
+    }
+    return outputArray;
+}
+export {appendUrlToPoster,appendUrlToProfile,getGenreString,populateGenreArray,appendMediaurlToImages };

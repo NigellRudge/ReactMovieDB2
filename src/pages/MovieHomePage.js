@@ -15,10 +15,8 @@ class MovieHomePage extends React.Component {
     async componentDidMount(){
         let service = new MovieService();
         await service.getPopularMovies().then(result => {
-
             this.setState ({
                 popularMovies: result,
-                //loading:false
             })
 
         })
@@ -27,7 +25,6 @@ class MovieHomePage extends React.Component {
                 nowPlayingMovies: result,
                 loading:false
             })
-            console.log(this.state.nowPlayingMovies);
         })
     }
 

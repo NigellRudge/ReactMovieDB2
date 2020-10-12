@@ -1,6 +1,8 @@
 import React from 'react';
 
 const ShowCard = function(props) {
+    let length = props.show.genre_ids.length >= 3 ? 3: props.show.genre_ids.length
+    props.show.genre_ids = props.show.genre_ids.slice(0,length);
     return (
         <div className="mt-8">
             <a href="#">
@@ -23,7 +25,14 @@ const ShowCard = function(props) {
                     <span>{ props.show.date} </span>
                 </div>
                 <div className="text-gray-400 text-sm">
-                    <span className="ml-1">Action, Adventure</span>
+                    {props.show.genre_ids.map((item,key) => {
+                        if(props.show.genre_ids[key+1]){
+                            return <span key={key}>{item.name}, </span>
+                        }
+                        else{
+                            return <span key={key}>{item.name} </span>
+                        }
+                    })}
                 </div>
             </div>
         </div>

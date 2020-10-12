@@ -3,13 +3,10 @@ import MovieHomePage from './pages/MovieHomePage';
 import ShowsHomePage from './pages/ShowsHomePage';
 import MenuComponent from './components/MenuComponent';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-import MovieService from "./services/MovieService";
+import {Switch, Route} from "react-router-dom";
+
 import ActorHomePage from "./pages/ActorHomePage";
+import MovieDetailPage from "./pages/MovieDetailPage";
 
 class App extends  React.Component{
   constructor() {
@@ -26,6 +23,7 @@ class App extends  React.Component{
     <div>
         <MenuComponent/>
        <Switch>
+           <Route path="/movie/:movieId" component={MovieDetailPage} />
             <Route path="/movies">
                 <MovieHomePage/>
             </Route>
