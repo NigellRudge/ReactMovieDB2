@@ -1,17 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {limitArray} from "../utils/functions";
 
 const ShowCard = function(props) {
-    let length = props.show.genre_ids.length >= 3 ? 3: props.show.genre_ids.length
-    props.show.genre_ids = props.show.genre_ids.slice(0,length);
+    let url = `/shows/${props.show.id}`
+    props.show.genre_ids = limitArray(props.show.genre_ids,3)
+    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150';
+    if(props.max_width != null) {
+        imgClass = `${imgClass} w-${props.max_width}`;
+    }
     return (
         <div className="mt-8">
-            <a href="#">
-                <img src={props.show.poster_path} alt="picture"
-                     className="hover:opacity-75 transition ease-in-out duration-150" />
-            </a>
+            <Link to={url}>
+                <img src={props.show.poster_path} alt="picture" className={imgClass} />
+            </Link>
             <div className="mt-2">
-                <a href="#"
-                   className="text-lg mt-2 hover:text-gray-300">{props.show.title}</a>
+                <Link to={url}  className="text-lg mt-2 hover:text-gray-300">{props.show.original_name}</Link>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">

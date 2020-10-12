@@ -1,40 +1,92 @@
 import React, {Component} from "react";
 import MovieService from "../services/MovieService";
 import {MovieCastCard} from "../components/MovieCastCard";
+import MovieCard from "../components/MovieCard";
+import {limitArray} from "../utils/functions";
 
 export default class MovieDetailPage extends Component{
     constructor(props) {
         super(props);
+        this.service = new MovieService();
+        const {match:{params}} = this.props;
         this.state = {
-            movieId:0,
+            movieId:params.movieId,
             movie:null,
-            loading:true
+            loading:true,
+            similarMovies:[]
         }
     }
     componentDidMount() {
-        const {match:{params}} = this.props;
-        console.log(params.movieId)
-        let service = new MovieService();
-        service.getMovieInfo(params.movieId)
+        console.log(this.state.movieId)
+        console.log('calling did mount')
+        this.loadData();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.movieId !== prevState.movieId){
+            this.loadData();
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps,prevState){
+        if(nextProps.match.params.movieId !== prevState.movieId){
+            console.log(nextProps.match.params.movieId)
+            return {
+                movieId: nextProps.match.params.movieId,
+                loading:true,
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    loadData(){
+        this.service.getMovieInfo(this.state.movieId)
             .then(result => {
                 this.setState({
                     movie:result,
                     loading:false
                 })
             })
-
+        this.service.getSimilarMovies(this.state.movieId)
+            .then(result =>{
+                this.setState({
+                    similarMovies: result
+                })
+            })
     }
+
     render() {
         if(this.state.loading){
             return <h1>Loading</h1>
         }
         else {
+            let similarMovies = null;
+            let playAction = null;
+            if(this.state.similarMovies.length > 0 ){
+                 similarMovies = <div className="movie-images">
+                                        <div className="container mx-auto px-4 py-16">
+                                            <h2 className="text-4xl font-semibold">Similar Movies</h2>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="galleryGrid">
+                                                {this.state.similarMovies.map((item,key) => {
+                                                    return(
+                                                        <MovieCard movie={item} key={key} max_width='64' />
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+            }
+            else {
+                similarMovies = <div></div>;
+            }
             let crewCount = 4;
             let castCount = 10;
             let imageCount = 10;
-            let crewArray = this.state.movie.credits.crew.length > crewCount ? this.state.movie.credits.crew.slice(0,crewCount): this.state.movie.credits.crew;
-            let castArray = this.state.movie.credits.cast.length > castCount ? this.state.movie.credits.cast.slice(0,castCount): this.state.movie.credits.cast;
-            let imageArray = this.state.movie.images.backdrops.length > imageCount ? this.state.movie.images.backdrops.slice(0,imageCount): this.state.movie.images.backdrops;
+            let crewArray = limitArray(this.state.movie.credits.crew,crewCount)
+            let castArray = limitArray(this.state.movie.credits.cast,castCount)
+            let imageArray = limitArray(this.state.movie.images.backdrops,imageCount)
             return(
                 <div>
                     <div className="movie-info border-b border-gray-800">
@@ -100,7 +152,7 @@ export default class MovieDetailPage extends Component{
                         </div>
                     </div>
 
-                    <div className="movie-images">
+                    <div className="movie-images border-b border-gray-800">
                         <div className="container mx-auto px-4 py-16">
                             <h2 className="text-4xl font-semibold">Images</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="galleryGrid">
@@ -114,6 +166,8 @@ export default class MovieDetailPage extends Component{
                             </div>
                         </div>
                     </div>
+
+                    {similarMovies}
                 </div>
             );
         }

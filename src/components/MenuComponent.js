@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import avatar from '../assets/img/avatar.png';
 
+//TODO: Add Active class for the current active route
 
 const  MenuComponent= function(props) {
     return(
@@ -31,7 +33,7 @@ const  MenuComponent= function(props) {
                 </div>
                 <div className="md:ml-4 mt-3 md:mt-0">
                     <a href="#">
-                        <img src="avatar.png" alt="avatar" className="rounded-full w-8 h-8" />
+                        <img src={avatar} alt="avatar" className="rounded-full w-8 h-8" />
                     </a>
                 </div>
             </div>

@@ -7,6 +7,9 @@ import {Switch, Route} from "react-router-dom";
 
 import ActorHomePage from "./pages/ActorHomePage";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import ShowDetailPage from "./pages/ShowDetailPage";
+
+//TODO: Add Shimmer/skeleton loader loading indicator
 
 class App extends  React.Component{
   constructor() {
@@ -15,27 +18,18 @@ class App extends  React.Component{
       movieList: null
     }
   }
-  componentDidMount(){
-
-  }
+  componentDidMount(){}
   render(){
     return (
     <div>
         <MenuComponent/>
        <Switch>
-           <Route path="/movie/:movieId" component={MovieDetailPage} />
-            <Route path="/movies">
-                <MovieHomePage/>
-            </Route>
-            <Route path="/shows">
-                <ShowsHomePage/>
-            </Route>
-           <Route path="/actors">
-               <ActorHomePage/>
-           </Route>
-           <Route path="/">
-                <MovieHomePage/>
-           </Route>
+            <Route path="/movie/:movieId" component={MovieDetailPage} />
+            <Route path="/movies" component={MovieHomePage} />
+            <Route path="/shows/:showId" component={ShowDetailPage} />
+            <Route path="/shows" component={ShowsHomePage} />
+            <Route path="/actors" component={ActorHomePage} />
+           <Route path="/" component={MovieHomePage}/>
        </Switch>
     </div>
 

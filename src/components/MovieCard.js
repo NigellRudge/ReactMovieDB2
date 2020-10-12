@@ -5,10 +5,14 @@ const MovieCard = function (props){
     let length = props.movie.genre_ids.length >= 3 ? 3: props.movie.genre_ids.length
     let url = `/movie/${props.movie.id}`;
     props.movie.genre_ids = props.movie.genre_ids.slice(0,length);
+    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150';
+    if(props.max_width != null) {
+        imgClass = `${imgClass} w-${props.max_width}`;
+    }
     return (
         <div className="mt-8">
             <Link to={url}>
-                <img src={props.movie.poster_path} alt="picture" className="hover:opacity-75 transition ease-in-out duration-150" />
+                <img src={props.movie.poster_path} alt="picture" className={imgClass} />
             </Link>
             <div className="mt-2">
                 <Link to={url} className="text-lg mt-2 hover:text-gray-300">{props.movie.title}</Link>

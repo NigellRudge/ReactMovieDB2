@@ -1,6 +1,7 @@
 import React from "react";
 
 const MovieCastCard = function(props) {
+
     return(
         <div className="mt-8">
             <a href="">

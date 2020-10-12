@@ -1,37 +1,9 @@
 import {media_url} from "./config";
+import person_placeholder from '../assets/img/person_placeholder.png';
+const ARRAYTYPE = 1;
+const SINGLETYPE = 2;
 
 
-const appendUrlToPoster = function(inputArray, url){
-    return inputArray.map((item) => {
-        item.poster_path = `${url}${item.poster_path}`;
-        return item;
-    });
-}
-
-const appendUrlToProfile = function(inputArray, url){
-    return inputArray.map((item) => {
-        item.profile_path = `${url}${item.profile_path}`;
-        return item;
-    });
-}
-const getGenreString=  function(inputGenreIds=[],genres){
-    let outputString = '';
-    // eslint-disable-next-line array-callback-return
-    inputGenreIds.map((genre_id,genre_id_key) =>{
-        // eslint-disable-next-line array-callback-return
-        genres.map((Genre,Genre_key) => {
-            if(Genre.id === genre_id){
-                if(!genre_id[genre_id_key+1]){
-                    outputString += Genre.name;
-                }
-                else {
-                    outputString += (Genre.name + ", ");
-                }
-            }
-        })
-    })
-    return outputString;
-}
 const populateGenreArray= function(idArray=[],itemArray=[]){
     let outputArrray = [];
     for(var i=0;i<idArray.length;i++){
@@ -44,12 +16,34 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
     return outputArrray;
 }
 
-const appendMediaurlToImages = function(inputArray,property){
-    let outputArray = [];
-    for(var i =0; i< inputArray.length; i++){
-        inputArray[i][property] = `${media_url}${inputArray[i][property]}`;
-        outputArray.push(inputArray[i]);
+
+
+const appendMediaUrlToProperty = function(input, property,type = 1){
+    let output = null;
+    if(type === ARRAYTYPE){
+        output = [];
+        for(let i =0; i< input.length; i++){
+            if(input[i][property] !== null){
+                input[i][property] = `${media_url}${input[i][property]}`;
+            }
+            else {
+                input[i][property] = person_placeholder;
+            }
+            output.push(input[i]);
+        }
+    }else if(type === SINGLETYPE) {
+            if(input[property] == null){
+                output = person_placeholder;
+                return output;
+            }
+        output = `${media_url}${input[property]}`;
     }
-    return outputArray;
+    return output;
 }
-export {appendUrlToPoster,appendUrlToProfile,getGenreString,populateGenreArray,appendMediaurlToImages };
+
+const limitArray = function(inputArray,limit=5){
+    return inputArray.length > limit ? inputArray.slice(0,limit): inputArray
+}
+
+
+export {populateGenreArray,appendMediaUrlToProperty,ARRAYTYPE,SINGLETYPE, limitArray };
