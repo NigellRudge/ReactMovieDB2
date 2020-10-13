@@ -1,4 +1,4 @@
-import {media_url} from "./config";
+import {getMediaUrl, NORMAL} from "./config";
 import person_placeholder from '../assets/img/person_placeholder.png';
 const ARRAYTYPE = 1;
 const SINGLETYPE = 2;
@@ -18,13 +18,13 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
 
 
 
-const appendMediaUrlToProperty = function(input, property,type = 1){
+const appendMediaUrl = function(input, property, type = ARRAYTYPE, size=NORMAL){
     let output = null;
     if(type === ARRAYTYPE){
         output = [];
         for(let i =0; i< input.length; i++){
             if(input[i][property] !== null){
-                input[i][property] = `${media_url}${input[i][property]}`;
+                input[i][property] = `${getMediaUrl(size)}${input[i][property]}`;
             }
             else {
                 input[i][property] = person_placeholder;
@@ -36,7 +36,7 @@ const appendMediaUrlToProperty = function(input, property,type = 1){
                 output = person_placeholder;
                 return output;
             }
-        output = `${media_url}${input[property]}`;
+        output = `${getMediaUrl(size)}${input[property]}`;
     }
     return output;
 }
@@ -46,4 +46,4 @@ const limitArray = function(inputArray,limit=5){
 }
 
 
-export {populateGenreArray,appendMediaUrlToProperty,ARRAYTYPE,SINGLETYPE, limitArray };
+export {populateGenreArray,appendMediaUrl,ARRAYTYPE,SINGLETYPE, limitArray };

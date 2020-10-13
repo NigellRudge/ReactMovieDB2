@@ -1,6 +1,6 @@
 import {api_key, base_url, media_url} from '../utils/config';
 import axios from 'axios';
-import {appendMediaUrlToProperty, ARRAYTYPE} from "../utils/functions";
+import {appendMediaUrl, ARRAYTYPE} from "../utils/functions";
 
 export default class ActorService {
 
@@ -13,7 +13,7 @@ export default class ActorService {
         }
         return await axios.get(url,{params:params})
             .then(response => {
-                response.data.results = appendMediaUrlToProperty(response.data.results,'profile_path',ARRAYTYPE);
+                response.data.results = appendMediaUrl(response.data.results,'profile_path',ARRAYTYPE);
                 //console.log(response.data.results);
                 return response.data.results;
             })
@@ -48,7 +48,7 @@ export default class ActorService {
         }
         return await axios.get(url,{params:params})
             .then(response => {
-                response.data.results = appendMediaUrlToProperty(response.data.results,'profile_path', ARRAYTYPE);
+                response.data.results = appendMediaUrl(response.data.results,'profile_path', ARRAYTYPE);
                 //console.log(response.data.results);
                 return response.data.results;
             })

@@ -1,7 +1,7 @@
 import {api_key, base_url} from '../utils/config';
 import axios from 'axios';
 import {
-    appendMediaUrlToProperty,
+    appendMediaUrl,
     ARRAYTYPE,
     populateGenreArray,
     SINGLETYPE
@@ -24,7 +24,7 @@ export default class ShowService {
          }
         return await axios.get(url,{params:params})
                 .then(response => {
-                    response.data.results = appendMediaUrlToProperty(response.data.results,'poster_path',ARRAYTYPE);
+                    response.data.results = appendMediaUrl(response.data.results,'poster_path',ARRAYTYPE);
                     response.data.results.map((item,key) => {
                         item.genre_ids = populateGenreArray(item.genre_ids,this.genres)
                         return true;
@@ -45,7 +45,7 @@ export default class ShowService {
          }
          return await axios.get(url,{params:params})
              .then(response => {
-                 response.data.results = appendMediaUrlToProperty(response.data.results,'poster_path',ARRAYTYPE);
+                 response.data.results = appendMediaUrl(response.data.results,'poster_path',ARRAYTYPE);
                  response.data.results.map((item,key) => {
                      item.genre_ids = populateGenreArray(item.genre_ids,this.genres)
                      return true;
@@ -77,12 +77,12 @@ export default class ShowService {
         }
         return axios.get(url,{params:params})
             .then(response => {
-                response.data.backdrop_path =  appendMediaUrlToProperty(response.data,'backdrop_path',SINGLETYPE)
-                response.data.poster_path = appendMediaUrlToProperty(response.data,'poster_path',SINGLETYPE)
-                response.data.images.backdrops = appendMediaUrlToProperty(response.data.images.backdrops,'file_path')
-                response.data.images.posters = appendMediaUrlToProperty(response.data.images.posters,'file_path')
-                response.data.credits.cast = appendMediaUrlToProperty(response.data.credits.cast,'profile_path')
-                response.data.seasons = appendMediaUrlToProperty(response.data.seasons,'poster_path',ARRAYTYPE);
+                response.data.backdrop_path =  appendMediaUrl(response.data,'backdrop_path',SINGLETYPE,1)
+                response.data.poster_path = appendMediaUrl(response.data,'poster_path',SINGLETYPE)
+                response.data.images.backdrops = appendMediaUrl(response.data.images.backdrops,'file_path')
+                response.data.images.posters = appendMediaUrl(response.data.images.posters,'file_path')
+                response.data.credits.cast = appendMediaUrl(response.data.credits.cast,'profile_path')
+                response.data.seasons = appendMediaUrl(response.data.seasons,'poster_path',ARRAYTYPE);
                 return response.data;
             })
             .catch(error => {
@@ -98,7 +98,7 @@ export default class ShowService {
         }
         return await axios.get(url,{params:params})
             .then(response => {
-                response.data.results = appendMediaUrlToProperty(response.data.results,'poster_path');
+                response.data.results = appendMediaUrl(response.data.results,'poster_path');
                 response.data.results.map((item,key) => {
                     item.genre_ids = populateGenreArray(item.genre_ids,this.genres)
                     return true;
