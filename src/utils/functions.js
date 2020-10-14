@@ -1,4 +1,4 @@
-import {getMediaUrl, NORMAL} from "./config";
+import {getMediaUrl, IMAGESIZES} from "./config";
 import person_placeholder from '../assets/img/person_placeholder.png';
 const ARRAYTYPE = 1;
 const SINGLETYPE = 2;
@@ -18,7 +18,7 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
 
 
 
-const appendMediaUrl = function(input, property, type = ARRAYTYPE, size=NORMAL){
+const appendMediaUrl = function(input, property, type = ARRAYTYPE, size=IMAGESIZES.NORMAL.key){
     let output = null;
     if(type === ARRAYTYPE){
         output = [];

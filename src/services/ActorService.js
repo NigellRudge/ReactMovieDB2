@@ -14,7 +14,6 @@ export default class ActorService {
         return await axios.get(url,{params:params})
             .then(response => {
                 response.data.results = appendMediaUrl(response.data.results,'profile_path',ARRAYTYPE);
-                //console.log(response.data.results);
                 return response.data.results;
             })
             .catch(error => {
@@ -49,7 +48,6 @@ export default class ActorService {
         return await axios.get(url,{params:params})
             .then(response => {
                 response.data.results = appendMediaUrl(response.data.results,'profile_path', ARRAYTYPE);
-                //console.log(response.data.results);
                 return response.data.results;
             })
             .catch(error => {

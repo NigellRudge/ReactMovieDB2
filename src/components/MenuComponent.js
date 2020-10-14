@@ -32,9 +32,9 @@ const  MenuComponent= function(props) {
                     </div>
                 </div>
                 <div className="md:ml-4 mt-3 md:mt-0">
-                    <a href="#">
+                    <Link to="#">
                         <img src={avatar} alt="avatar" className="rounded-full w-8 h-8" />
-                    </a>
+                    </Link>
                 </div>
             </div>
             </div>

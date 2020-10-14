@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
 import ActorCard from "../components/ActorCard";
 import ActorService from "../services/ActorService";
+import {MediaContainer} from "../components/MediaContainer";
+import {MEDIA_TYPES} from "../utils/config";
 
 export default class ActorHomePage extends Component{
     constructor(props) {
@@ -34,7 +36,7 @@ export default class ActorHomePage extends Component{
                         <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">Popular actors</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                             {this.state.popularActors.map((actor,key)=>{
-                                return <ActorCard actor={actor} key={key}/>
+                                return <MediaContainer type={MEDIA_TYPES.ACTOR} item={actor} key={key}/>
                             })
                             }
                         </div>

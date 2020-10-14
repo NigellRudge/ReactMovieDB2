@@ -83,7 +83,6 @@ class MovieService {
         return await axios.get(url,{params:params})
             .then(response => {
                 response.data.results = appendMediaUrl(response.data.results,'poster_path',ARRAYTYPE);
-               // console.log(response.data.results);
                 return response.data.results;
             })
             .catch(error => {
@@ -98,9 +97,7 @@ class MovieService {
          }
          return await axios.get(url,{params:params})
              .then(response => {
-                 //console.log(response);
                  return response.data.genres
-
              })
              .catch(error => {
                  console.log(error);
@@ -130,24 +127,4 @@ class MovieService {
              })
      }
 }
-
-class ApiService {
-    constructor(dataType) {
-        this.dataType = dataType;
-    }
-
-    async fetchData(urlSegment, page = 1){
-        let url = `${base_url}/${urlSegment}`;
-        let params = {
-            api_key:api_key,
-            page:page
-        }
-        return await axios.get(url,{params:params})
-            .then(response => {
-
-            })
-    }
-
-}
-
 export default MovieService;

@@ -1,5 +1,7 @@
 import ShowCard from "./ShowCard";
 import React from "react";
+import {MediaContainer} from "./MediaContainer";
+import {MEDIA_TYPES} from "../utils/config";
 
 const SimilarItemsComponent = function(props){
     if(props.items.length > 0){
@@ -8,9 +10,10 @@ const SimilarItemsComponent = function(props){
                 <h2 className="text-4xl font-semibold">Similar Content</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="galleryGrid">
                     {props.items.map((item,key) => {
-                        return(
-                            <ShowCard show={item} key={key} max_width='64' />
-                        );
+                            if(props.type === 1){
+                                return <MediaContainer type={MEDIA_TYPES.MOVIE} item={item} key={key} max_width='64'/>
+                            }
+                            return <MediaContainer type={MEDIA_TYPES.SHOW} item={item} key={key} max_width='64'/>
                     })}
                 </div>
             </div>

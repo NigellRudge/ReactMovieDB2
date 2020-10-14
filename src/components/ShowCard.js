@@ -12,7 +12,7 @@ const ShowCard = function(props) {
     return (
         <div className="mt-8">
             <Link to={url}>
-                <img src={props.show.poster_path} alt="picture" className={imgClass} />
+                <img src={props.show.poster_path} alt="show_image" className={imgClass} />
             </Link>
             <div className="mt-2">
                 <Link to={url}  className="text-lg mt-2 hover:text-gray-300">{props.show.original_name}</Link>

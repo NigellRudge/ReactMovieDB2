@@ -1,4 +1,4 @@
-import {api_key, base_url} from '../utils/config';
+import {api_key, base_url, IMAGESIZES} from '../utils/config';
 import axios from 'axios';
 import {
     appendMediaUrl,
@@ -77,7 +77,7 @@ export default class ShowService {
         }
         return axios.get(url,{params:params})
             .then(response => {
-                response.data.backdrop_path =  appendMediaUrl(response.data,'backdrop_path',SINGLETYPE,1)
+                response.data.backdrop_path =  appendMediaUrl(response.data,'backdrop_path',SINGLETYPE,IMAGESIZES.ORIGINAL.key)
                 response.data.poster_path = appendMediaUrl(response.data,'poster_path',SINGLETYPE)
                 response.data.images.backdrops = appendMediaUrl(response.data.images.backdrops,'file_path')
                 response.data.images.posters = appendMediaUrl(response.data.images.posters,'file_path')
@@ -111,7 +111,19 @@ export default class ShowService {
                 console.log(error)
             })
     }
-     searchShows(query,page=1){
-
+     async searchShows(query,page=1){
+         let url = `${base_url}/search/tv`;
+         let params = {
+             api_key:api_key,
+             query:query
+         }
+         return await axios.get(url,{params:params})
+             .then(response => {
+                 response.data.results = appendMediaUrl(response.data.results,'poster_path',ARRAYTYPE);
+                 return response.data.results;
+             })
+             .catch(error => {
+                 console.log(error);
+             })
      }
 }

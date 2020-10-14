@@ -113,7 +113,7 @@ export default class ShowDetailPage extends Component{
                 <CastComponent cast={this.state.show.credits.cast} />
                 <SeasonsComponent seasons={this.state.show.seasons} moreSeasonUrl="#" />
                 <ImagesComponent images={this.state.show.images.backdrops} />
-                <SimilarItemsComponent items={this.state.similarShows} />
+                <SimilarItemsComponent items={this.state.similarShows} type={2} />
             </div>
         );
     }

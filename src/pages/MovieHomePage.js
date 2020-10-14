@@ -1,6 +1,8 @@
 import React from 'react';
 import MovieService from '../services/MovieService';
 import MovieCard from '../components/MovieCard';
+import {MediaContainer} from "../components/MediaContainer";
+import {MEDIA_TYPES} from "../utils/config";
 
 class MovieHomePage extends React.Component {
     constructor(){
@@ -45,7 +47,7 @@ class MovieHomePage extends React.Component {
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                             {this.state.popularMovies.map((movie,key) =>{
-                                    return <MovieCard movie={movie} key={key} />
+                                    return <MediaContainer type={MEDIA_TYPES.MOVIE} item={movie} key={key} />
                                 }
                              )}
                         </div>
@@ -57,7 +59,7 @@ class MovieHomePage extends React.Component {
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                             {this.state.nowPlayingMovies.map((movie,key) =>{
-                                    return <MovieCard movie={movie} key={key} />
+                                return <MediaContainer type={MEDIA_TYPES.MOVIE} item={movie} key={key} />
                                 }
                              )}
                         </div>
