@@ -16,6 +16,23 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
     return outputArrray;
 }
 
+const getShortCode = function (input,property,char,type=ARRAYTYPE) {
+    let output = null;
+    if(type === ARRAYTYPE){
+        output = []
+        for(let i=0;i<input.length;i++){
+            if(input[i][property] !== null){
+                input[i][property] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
+                console.log(`${i}:${input[i][property] }`);
+            }
+            else {
+                input[i][property] = 'No info';
+            }
+            output.push(input[i]);
+        }
+    }
+    return output;
+}
 
 
 const appendMediaUrl = function(input, property, type = ARRAYTYPE, size=IMAGESIZES.NORMAL.key){
@@ -46,4 +63,4 @@ const limitArray = function(inputArray,limit=5){
 }
 
 
-export {populateGenreArray,appendMediaUrl,ARRAYTYPE,SINGLETYPE, limitArray };
+export {populateGenreArray,appendMediaUrl,ARRAYTYPE,SINGLETYPE, limitArray, getShortCode };

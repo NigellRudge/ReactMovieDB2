@@ -2,7 +2,7 @@ import {api_key, base_url, IMAGESIZES} from '../utils/config';
 import axios from 'axios';
 import {
     appendMediaUrl,
-    ARRAYTYPE,
+    ARRAYTYPE, getShortCode,
     populateGenreArray,
     SINGLETYPE
 } from "../utils/functions";
@@ -70,7 +70,7 @@ export default class ShowService {
             })
     }
      getShow(showId){
-        let url = `${base_url}tv/${showId}?api_key=${api_key}`;
+        let url = `${base_url}tv/${showId}`;
         let params = {
             api_key:api_key,
             append_to_response:'images,credits,genres'
@@ -126,4 +126,23 @@ export default class ShowService {
                  console.log(error);
              })
      }
+
+    async getSeasonInfo(showId,seasonId) {
+        let url = `${base_url}tv/${showId}/season/${seasonId}`;
+        let params = {
+            api_key:api_key,
+            append_to_response:'images,credits'
+        }
+        return axios.get(url,{params:params})
+            .then(response => {
+                response.data.poster_path = appendMediaUrl(response.data,'poster_path',SINGLETYPE)
+                response.data.images.posters = appendMediaUrl(response.data.images.posters,'file_path')
+                response.data.episodes = appendMediaUrl(response.data.episodes,'still_path',ARRAYTYPE);
+                response.data.episodes = getShortCode(response.data.episodes,'episode_number','E',ARRAYTYPE);
+                return response.data;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 }

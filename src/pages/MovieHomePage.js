@@ -1,6 +1,5 @@
 import React from 'react';
 import MovieService from '../services/MovieService';
-import MovieCard from '../components/MovieCard';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 const SeasonCard = function (props) {
     let seasonNumber = props.season.season_number<10 ? `S0${props.season.season_number}`: `S${props.season.season_number}`;
-    let url = '#';
+    let url = `/shows/${props.showId}/season/${props.season.season_number}`;
     return(
         <div className="mt-8">
             <Link to={url}>

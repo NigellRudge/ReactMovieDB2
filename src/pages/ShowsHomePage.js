@@ -1,6 +1,8 @@
 import React from 'react';
 import ShowCard from '../components/ShowCard';
 import ShowService from '../services/ShowService';
+import {MediaContainer} from "../components/MediaContainer";
+import {MEDIA_TYPES} from "../utils/config";
 
 export default class ShowsHomePage extends React.Component {
     constructor(props){
@@ -44,7 +46,7 @@ export default class ShowsHomePage extends React.Component {
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                                 {this.state.nowAiringShows.map((show,key) =>{
-                                        return <ShowCard show={show} key={key} />
+                                        return <MediaContainer item={show} type={MEDIA_TYPES.SHOW} key={key} />
                                     }
                                  )}
                             </div>
@@ -57,7 +59,7 @@ export default class ShowsHomePage extends React.Component {
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                                 {this.state.topRatedShows.map((show,key) =>{
-                                        return <ShowCard show={show} key={key} />
+                                    return <MediaContainer item={show} type={MEDIA_TYPES.SHOW} key={key} />
                                     }
                                  )}
                             </div>

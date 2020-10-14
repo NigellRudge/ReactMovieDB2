@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import ActorCard from "../components/ActorCard";
 import ActorService from "../services/ActorService";
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";

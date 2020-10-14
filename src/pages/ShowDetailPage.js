@@ -63,16 +63,16 @@ export default class ShowDetailPage extends Component{
 
         if(this.state.loading){
             return <h1>Loading</h1>
-        }
-        const style = {
-            backgroundImage: `url('${this.state.show.backdrop_path}')`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'auto',
-        }
-        console.log(style);
-        return (
-            <div>
-                <div className="show-info border-b border-gray-800">
+        }else{
+            const style = {
+                backgroundImage: `url('${this.state.show.backdrop_path}')`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'auto',
+            }
+            console.log(style);
+            return (
+                <div>
+                    <div className="show-info border-b border-gray-800">
                         <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row" >
                             <div className="flex-none">
                                 <img src={this.state.show.poster_path} alt="poster"  className="w-64 lg:w-96" />
@@ -109,14 +109,16 @@ export default class ShowDetailPage extends Component{
 
                             </div>
                         </div>
+                    </div>
+                    <CastComponent cast={this.state.show.credits.cast} />
+                    <SeasonsComponent seasons={this.state.show.seasons} moreSeasonUrl="#" showId={this.state.show.id} />
+                    <ImagesComponent images={this.state.show.images.backdrops} />
+                    <SimilarItemsComponent items={this.state.similarShows} type={2} />
                 </div>
-                <CastComponent cast={this.state.show.credits.cast} />
-                <SeasonsComponent seasons={this.state.show.seasons} moreSeasonUrl="#" />
-                <ImagesComponent images={this.state.show.images.backdrops} />
-                <SimilarItemsComponent items={this.state.similarShows} type={2} />
-            </div>
-        );
+            );
+        }
     }
+
 }
 
 
