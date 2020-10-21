@@ -1,5 +1,4 @@
 import React from 'react';
-import ShowCard from '../components/ShowCard';
 import ShowService from '../services/ShowService';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";

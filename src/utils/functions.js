@@ -16,19 +16,40 @@ const populateGenreArray= function(idArray=[],itemArray=[]){
     return outputArrray;
 }
 
-const getShortCode = function (input,property,char,type=ARRAYTYPE) {
+const getShortCode = function (input,property,char,type=ARRAYTYPE,replace=null) {
     let output = null;
     if(type === ARRAYTYPE){
         output = []
         for(let i=0;i<input.length;i++){
             if(input[i][property] !== null){
-                input[i][property] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
-                console.log(`${i}:${input[i][property] }`);
+                if(replace !== null){
+                    input[i][replace] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
+
+                }
+                else {
+                    input[i][property] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
+                    console.log(`${i}:${input[i][property] }`);
+                }
+
             }
             else {
-                input[i][property] = 'No info';
+                if(replace !== null){
+                    input[i][replace] = 'No info';
+                    continue;
+                }
+                else {
+                    input[i][property] = 'No info';
+                }
             }
             output.push(input[i]);
+        }
+    }
+    else if( type === SINGLETYPE) {
+        if(replace !== null){
+            input[replace] = input[property] >= 10 ? `${char}${input[property]}`:`${char}0${input[property]}`;
+        }
+        else {
+            input[property] = input[property] >= 10 ? `${char}${input[property]}`:`${char}0${input[property]}`;
         }
     }
     return output;
@@ -62,5 +83,15 @@ const limitArray = function(inputArray,limit=5){
     return inputArray.length > limit ? inputArray.slice(0,limit): inputArray
 }
 
+const filterArray = function(inputArray=[],query="",property){
+    let output = inputArray
+    if(query != null && query.length > 0){
+        output = inputArray.filter((item)=>{
+              return item[property].toLowerCase().contains(query.toLowerCase())
+        })
+    }
+    return output;
+}
 
-export {populateGenreArray,appendMediaUrl,ARRAYTYPE,SINGLETYPE, limitArray, getShortCode };
+
+export {populateGenreArray,appendMediaUrl,ARRAYTYPE,SINGLETYPE, limitArray, getShortCode, filterArray };

@@ -1,5 +1,4 @@
 import {limitArray} from "../utils/functions";
-import {Link} from "react-router-dom";
 import {SeasonCard} from "./SeasonCard";
 import React from "react";
 import {MoreContentComponent} from "./MoreContentComponent";

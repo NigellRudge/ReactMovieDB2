@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import ShowService from "../services/ShowService";
-import {ImagesComponent} from "../components/ImagesComponent";
 import {TrailerComponent} from "../components/TrailerComponent";
 import {EpisodeComponent} from "../components/EpisodeComponent";
 
@@ -56,7 +55,7 @@ export default class SeasonDetailPage extends Component{
                         </div>
                     </div>
 
-                    <EpisodeComponent episodes={this.state.season.episodes} />
+                    <EpisodeComponent episodes={this.state.season.episodes} showId={this.state.showId} seasonId={this.state.seasonId} />
                 </div>
             );
         }

@@ -138,11 +138,27 @@ export default class ShowService {
                 response.data.poster_path = appendMediaUrl(response.data,'poster_path',SINGLETYPE)
                 response.data.images.posters = appendMediaUrl(response.data.images.posters,'file_path')
                 response.data.episodes = appendMediaUrl(response.data.episodes,'still_path',ARRAYTYPE);
-                response.data.episodes = getShortCode(response.data.episodes,'episode_number','E',ARRAYTYPE);
+                response.data.episodes = getShortCode(response.data.episodes,'episode_number','E',ARRAYTYPE,'id');
                 return response.data;
             })
             .catch(error => {
                 console.log(error)
+            })
+    }
+
+    async getEpisodeInfo(showId, seasonId,episodeId) {
+        let url = `${base_url}tv/${showId}/season/${seasonId}/episode/${episodeId}`;
+        let params = {
+            api_key:api_key,
+            append_to_response: 'images'
+        };
+        return await axios.get(url,{params})
+            .then(response => {
+                response.data.images.stills = appendMediaUrl(response.data.images.stills,'file_path',ARRAYTYPE,IMAGESIZES.NORMAL)
+                response.data.still_path = appendMediaUrl(response.data,'still_path',SINGLETYPE,IMAGESIZES.NORMAL)
+                response.data.guest_stars = appendMediaUrl(response.data.guest_stars,'profile_path',ARRAYTYPE,IMAGESIZES.NORMAL)
+                console.log();
+                return response.data;
             })
     }
 }

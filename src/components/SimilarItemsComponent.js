@@ -1,4 +1,3 @@
-import ShowCard from "./ShowCard";
 import React from "react";
 import {MediaContainer} from "./MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
