@@ -14,7 +14,7 @@ export default function SkeletonCardList({title}) {
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {data.map((movie,key) =>{
-                                return <SkeletonCard />
+                                return <SkeletonCard  key={key}/>
                             }
                         )}
                     </div>

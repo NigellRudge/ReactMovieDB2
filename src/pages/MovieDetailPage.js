@@ -5,6 +5,7 @@ import {ImagesComponent} from "../components/ImagesComponent";
 import {CastComponent} from "../components/CastComponent";
 import {TrailerComponent} from "../components/TrailerComponent";
 import {CrewComponent} from "../components/CewComponent";
+import GenreList from "../components/GenreList";
 
 export default class MovieDetailPage extends Component{
     constructor(props) {
@@ -78,14 +79,8 @@ export default class MovieDetailPage extends Component{
                                 <span className="mx-2">|</span>
                                 <span>{this.state.movie.release_date}</span>
                                 <span className="mx-2">|</span>
-                                {this.state.movie.genres.map((item,key) => {
-                                    if(!this.state.movie.genres[key+1]){
-                                        return <span className="ml-1" key={key}>{item.name}</span>
-                                    }
-                                    else {
-                                        return <span className="ml-1" key={key}>{item.name},</span>
-                                    }
-                                })}
+                                {console.log(this.state.movie.genres)}
+                                <GenreList genres={this.state.movie.genres} type={1}/>
                             </div>
 
                             <p className="text-gray-300 mt-8">

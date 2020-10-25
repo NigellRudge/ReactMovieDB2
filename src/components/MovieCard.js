@@ -1,21 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import GenreBullet from "./GenreList";
+import GenreList from "./GenreList";
 
-const MovieCard = function (props){
-    let length = props.movie.genre_ids.length >= 3 ? 3: props.movie.genre_ids.length
-    let url = `/movie/${props.movie.id}`;
-    props.movie.genre_ids = props.movie.genre_ids.slice(0,length);
-    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150';
-    if(props.max_width != null) {
-        imgClass = `${imgClass} w-${props.max_width}`;
+const MovieCard = function ({movie,max_width}){
+    let length = movie.genre_ids.length >= 3 ? 3: movie.genre_ids.length
+    let url = `/movie/${movie.id}`;
+    movie.genre_ids = movie.genre_ids.slice(0,length);
+    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150 rounded';
+    if(max_width != null) {
+        imgClass = `${imgClass} w-${max_width}`;
     }
+    console.log(movie)
     return (
         <div className="mt-8">
             <Link to={url}>
-                <img src={props.movie.poster_path} alt="movie_image" className={imgClass} />
+                <img src={movie.poster_path} alt="movie_image" className={imgClass} />
             </Link>
             <div className="mt-2">
-                <Link to={url} className="text-lg mt-2 hover:text-gray-300">{props.movie.title}</Link>
+                <Link to={url} className="text-lg mt-2 hover:text-gray-300">{movie.title}</Link>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">
@@ -24,20 +27,11 @@ const MovieCard = function (props){
                                 data-name="star"/>
                         </g>
                     </svg>
-                    <span className="ml-1">{ props.movie.vote_average} %</span>
+                    <span className="ml-1">{movie.vote_average} %</span>
                     <span className="mx-2">|</span>
-                    <span>{props.movie.date} </span>
+                    <span>{movie.release_date} </span>
                 </div>
-                <div className="text-gray-400 text-sm">
-                    {props.movie.genre_ids.map((item,key) => {
-                        if(props.movie.genre_ids[key+1]){
-                            return <span key={key}>{item.name}, </span>
-                        }
-                        else{
-                            return <span key={key}>{item.name} </span>
-                        }
-                    })}
-                </div>
+                <GenreList genres={movie.genre_ids} type={2} />
             </div>
         </div>
     );

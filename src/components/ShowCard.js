@@ -1,21 +1,27 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {limitArray} from "../utils/functions";
+import GenreList from "./GenreList";
+import {months} from "../utils/config";
 
-const ShowCard = function(props) {
-    let url = `/shows/${props.show.id}`
-    props.show.genre_ids = limitArray(props.show.genre_ids,3)
-    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150';
-    if(props.max_width != null) {
-        imgClass = `${imgClass} w-${props.max_width}`;
+const ShowCard = function({show,max_width}) {
+    let url = `/shows/${show.id}`
+    show.genre_ids = limitArray(show.genre_ids,3)
+    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150 rounded';
+    if(max_width != null) {
+        imgClass = `${imgClass} w-${max_width}`;
     }
+    let fullDate = new Date(show.first_air_date);
+    let date = `${months[fullDate.getMonth()]} ${fullDate.getFullYear()}`;
+
+    console.log(show)
     return (
         <div className="mt-8">
             <Link to={url}>
-                <img src={props.show.poster_path} alt="show_image" className={imgClass} />
+                <img src={show.poster_path} alt="show_image" className={imgClass} />
             </Link>
             <div className="mt-2">
-                <Link to={url}  className="text-lg mt-2 hover:text-gray-300">{props.show.original_name}</Link>
+                <Link to={url}  className="text-lg mt-2 hover:text-gray-300">{show.name}</Link>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">
@@ -24,20 +30,11 @@ const ShowCard = function(props) {
                                 data-name="star"/>
                         </g>
                     </svg>
-                    <span className="ml-1">{ props.show.vote_average} %</span>
+                    <span className="ml-1">{show.vote_average} %</span>
                     <span className="mx-2">|</span>
-                    <span>{ props.show.date} </span>
+                    <span>{date} </span>
                 </div>
-                <div className="text-gray-400 text-sm">
-                    {props.show.genre_ids.map((item,key) => {
-                        if(props.show.genre_ids[key+1]){
-                            return <span key={key}>{item.name}, </span>
-                        }
-                        else{
-                            return <span key={key}>{item.name} </span>
-                        }
-                    })}
-                </div>
+                <GenreList genres={show.genre_ids} type={2} />
             </div>
         </div>
     );
