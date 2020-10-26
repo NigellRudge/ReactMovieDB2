@@ -11,7 +11,7 @@ const ImagesComponent = function (props) {
                 {imageArray.map((item,key) => {
                     return(
                         <div className="mt-8" id="galleryImage" key={key}>
-                            <img src={item.file_path} alt="image1" className="hover:opacity-75 transition ease-in-out duration-150" />
+                            <img src={item.file_path} alt="image1" className="hover:shadow-outline rounded transition ease-in-out duration-150" />
                         </div>
                     );
                 })}

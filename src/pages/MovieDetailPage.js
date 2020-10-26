@@ -6,6 +6,7 @@ import {CastComponent} from "../components/CastComponent";
 import {TrailerComponent} from "../components/TrailerComponent";
 import {CrewComponent} from "../components/CewComponent";
 import GenreList from "../components/GenreList";
+import PageLoading from "../components/PageLoading";
 
 export default class MovieDetailPage extends Component{
     constructor(props) {
@@ -61,8 +62,9 @@ export default class MovieDetailPage extends Component{
     }
 
     render() {
-        if(this.state.loading){
-            return <h1>Loading</h1>
+        const {loading} = this.state;
+        if(loading){
+            return <PageLoading />
         }
         return(
             <div>

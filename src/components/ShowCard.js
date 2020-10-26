@@ -7,7 +7,7 @@ import {months} from "../utils/config";
 const ShowCard = function({show,max_width}) {
     let url = `/shows/${show.id}`
     show.genre_ids = limitArray(show.genre_ids,3)
-    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150 rounded';
+    let imgClass = 'rounded hover:shadow-outline  transition ease-in-out duration-150';
     if(max_width != null) {
         imgClass = `${imgClass} w-${max_width}`;
     }
@@ -21,7 +21,7 @@ const ShowCard = function({show,max_width}) {
                 <img src={show.poster_path} alt="show_image" className={imgClass} />
             </Link>
             <div className="mt-2">
-                <Link to={url}  className="text-lg mt-2 hover:text-gray-300">{show.name}</Link>
+                <Link to={url}  className="text-lg mt-2 hover:text-orange-500">{show.name}</Link>
                 <div className="flex items-center text-gray-400 text-sm mt-1">
                     <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">

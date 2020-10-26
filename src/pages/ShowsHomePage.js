@@ -2,10 +2,12 @@ import React from 'react';
 import ShowService from '../services/ShowService';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
+import SkeletonCardList from "../components/SkeletonCardList";
 
 export default class ShowsHomePage extends React.Component {
     constructor(props){
         super(props);
+        this.service = new ShowService();
         this.state = {
             nowAiringShows: null,
             topRatedShows: null,
@@ -14,27 +16,43 @@ export default class ShowsHomePage extends React.Component {
     }
 
     async componentDidMount(){
-        let service = new ShowService();
-        await service.getNowAiringShows()
-            .then(result => {
-                this.setState({
-                    nowAiringShows: result
-                })
-                console.log(this.state.nowAiringShows)
-        });
-        await service.getTopRatedShows()
-            .then(result => {
-                this.setState({
-                    topRatedShows: result,
-                    loading: false
-                });
-                console.log(this.state.topRatedShows)
-        });
+        this.loadData();
     }
 
+    async loadData(){
+        await setTimeout(()=>{
+            this.service.getNowAiringShows()
+                .then(result => {
+                    this.setState({
+                        nowAiringShows: result
+                    })
+                    console.log(this.state.nowAiringShows)
+                })
+                .then(()=>{
+                    this.service.getTopRatedShows()
+                        .then(result => {
+                            this.setState({
+                                topRatedShows: result,
+                                loading: false
+                            });
+                            console.log(this.state.topRatedShows)
+                        })
+                        .then(()=>{
+                            this.setState({
+                                loading: false
+                            });
+                        });
+                });
+        },1200)
+    }
     render(){
         if(this.state.loading){
-            return <h1>loading</h1>
+            return(
+                <div>
+                    <SkeletonCardList title="Popular Shows" />
+                    <SkeletonCardList title="Now Airing" />
+                </div>
+            )
         }
         else {
             return(

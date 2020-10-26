@@ -6,6 +6,7 @@ import {SimilarItemsComponent} from "../components/SimilarItemsComponent";
 import {TrailerComponent} from "../components/TrailerComponent";
 import {CrewComponent} from "../components/CewComponent";
 import {SeasonsComponent} from "../components/SeasonsComponent";
+import PageLoading from "../components/PageLoading";
 
 export default class ShowDetailPage extends Component{
     constructor(props) {
@@ -42,27 +43,38 @@ export default class ShowDetailPage extends Component{
         }
     }
 
-    loadData(){
-        this.service.getShow(this.state.showId)
-            .then(result => {
-                console.log(result)
-                this.setState({
-                    show: result
+    async loadData(){
+        await setTimeout(()=>{
+            this.service.getShow(this.state.showId)
+                .then(result => {
+                    console.log(result)
+                    this.setState({
+                        show: result
+                    })
                 })
-            })
-        this.service.getSimilarShows(this.state.showId)
-            .then(result => {
-                console.log(result)
-                this.setState({
-                    similarShows:result,
-                    loading:false
+                .then(()=>{
+                    this.service.getSimilarShows(this.state.showId)
+                        .then(result => {
+                            console.log(result)
+                            this.setState({
+                                similarShows:result,
+                                loading:false
+                            })
+                        })
+                        .then(()=>{
+                            this.setState({
+                                loading:false
+                            })
+                        })
                 })
-            })
+
+        },1500)
+
     }
     render() {
 
         if(this.state.loading){
-            return <h1>Loading</h1>
+            return <PageLoading />
         }else{
             const style = {
                 backgroundImage: `url('${this.state.show.backdrop_path}')`,

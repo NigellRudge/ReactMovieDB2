@@ -7,7 +7,7 @@ const SeasonCard = function (props) {
     return(
         <div className="mt-8">
             <Link to={url}>
-                <img src={props.season.poster_path} alt="@season.name" className="hover:opacity-75 transition ease-in-out duration-150" />
+                <img src={props.season.poster_path} alt="@season.name" className="hover:shadow-outline rounded transition ease-in-out duration-150" />
             </Link>
             <div className="mt-2">
                 <Link to={url} className="text-lg mt-2 hover:text-gray:300">{props.season.name}</Link>

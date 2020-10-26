@@ -7,7 +7,7 @@ const MovieCard = function ({movie,max_width}){
     let length = movie.genre_ids.length >= 3 ? 3: movie.genre_ids.length
     let url = `/movie/${movie.id}`;
     movie.genre_ids = movie.genre_ids.slice(0,length);
-    let imgClass = 'hover:opacity-75 transition ease-in-out duration-150 rounded';
+    let imgClass = 'rounded hover:shadow-outline  transition ease-in-out duration-150';
     if(max_width != null) {
         imgClass = `${imgClass} w-${max_width}`;
     }
