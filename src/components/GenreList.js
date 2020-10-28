@@ -7,7 +7,7 @@ export default function GenreList({genres,type=1}){
     if(type === 1){
         return <div>
             {genres.map((item,key) => {
-                return <GenreBullet genre={item.name} />
+                return <GenreBullet genre={item.name} key={key} />
             })}
         </div>
     }

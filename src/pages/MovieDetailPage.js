@@ -21,15 +21,18 @@ export default class MovieDetailPage extends Component{
         }
     }
     componentDidMount() {
-        console.log(this.state.movieId)
-        console.log('calling did mount')
+        console.log(this.props)
+       // console.log(this.state.movieId)
+        //console.log('calling did mount')
         this.loadData();
+        window.scrollTo(0,0);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.movieId !== prevState.movieId){
             this.loadData();
         }
+        window.scrollTo(0,0);
     }
 
     static getDerivedStateFromProps(nextProps,prevState){
@@ -81,7 +84,6 @@ export default class MovieDetailPage extends Component{
                                 <span className="mx-2">|</span>
                                 <span>{this.state.movie.release_date}</span>
                                 <span className="mx-2">|</span>
-                                {console.log(this.state.movie.genres)}
                                 <GenreList genres={this.state.movie.genres} type={1}/>
                             </div>
 

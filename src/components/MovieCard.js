@@ -11,7 +11,7 @@ const MovieCard = function ({movie,max_width}){
     if(max_width != null) {
         imgClass = `${imgClass} w-${max_width}`;
     }
-    console.log(movie)
+    //console.log(movie)
     return (
         <div className="mt-8">
             <Link to={url}>

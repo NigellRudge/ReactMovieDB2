@@ -38,11 +38,11 @@ const ActorCard = function(props){
                             let tempUrl = `/movie/${item.id}`;
                             if(!props.actor.known_for[key+1]){
 
-                                return <Link to={tempUrl}>
+                                return <Link to={tempUrl} key={key}>
                                     <span key={key} className="mr-1 hover:font-semibold hover:text-orange-500">{item.title}</span>
                                 </Link>
                             }
-                            return <Link to={tempUrl}>
+                            return <Link to={tempUrl} key={key}>
                                 <span key={key} className="mr-1 hover:font-semibold hover:text-orange-500">{item.title},</span>
                             </Link>
                         })}

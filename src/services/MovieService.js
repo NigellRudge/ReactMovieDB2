@@ -64,7 +64,7 @@ class MovieService {
                         response.data.images.backdrops = appendMediaUrl(response.data.images.backdrops,'file_path')
                         response.data.images.posters = appendMediaUrl(response.data.images.posters,'file_path')
                         response.data.credits.cast = appendMediaUrl(response.data.credits.cast,'profile_path')
-                    console.log(response.data);
+                    //console.log(response.data);
                     return response.data
 
                 })

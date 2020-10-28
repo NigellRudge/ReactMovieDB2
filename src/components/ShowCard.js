@@ -14,7 +14,7 @@ const ShowCard = function({show,max_width}) {
     let fullDate = new Date(show.first_air_date);
     let date = `${months[fullDate.getMonth()]} ${fullDate.getFullYear()}`;
 
-    console.log(show)
+    //console.log(show)
     return (
         <div className="mt-8">
             <Link to={url}>

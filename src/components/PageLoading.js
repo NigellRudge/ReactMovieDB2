@@ -29,9 +29,9 @@ export  default function PageLoading () {
                 <div className="container mx-auto px-4 py-16">
                     <h2 className="text-4xl font-semibold text-orange-500">Cast</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-                        {Array(10).fill().map(()=>{
-                            return  <div className="mt-8">
-                                        <Skeleton height={350} duration={1} width={220} />
+                        {Array(10).fill().map((item,key)=>{
+                            return  <div className="mt-8" key={key}>
+                                        <Skeleton height={350} duration={1} width={220}  />
                                     </div>
                         })}
                     </div>
@@ -42,10 +42,10 @@ export  default function PageLoading () {
                     <div className="container mx-auto px-4 py-16">
                         <h2 className="text-4xl font-semibold">Images</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="galleryGrid">
-                            {Array(9).fill().map(() => {
+                            {Array(9).fill().map((item,key) => {
                                 return(
-                                    <div className="mt-8" id="galleryImage">
-                                        <Skeleton width={400} height={200} />
+                                    <div className="mt-8" id="galleryImage" key={key}>
+                                        <Skeleton width={400} height={200}  />
                                     </div>
                                 );
                             })}

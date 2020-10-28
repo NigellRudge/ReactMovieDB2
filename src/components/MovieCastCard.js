@@ -7,7 +7,7 @@ const MovieCastCard = function(props) {
         <div className="mt-8">
             <Link to={url}>
                 <img src={props.actor.profile_path} alt="actor1"
-                     className="hover:opacity-75 transition ease-in-out duration-150" />
+                     className="hover:shadow-outline rounded transition ease-in-out duration-150" />
             </Link >
             <div className="mt-2">
                 <Link to={url} className="text-lg mt-2 hover:text-gray:300">{props.actor.name}</Link>

@@ -2,31 +2,43 @@ import React , {Component} from 'react';
 import ActorService from "../services/ActorService";
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
+import SkeletonCardList from "../components/SkeletonCardList";
 
 export default class ActorHomePage extends Component{
     constructor(props) {
         super(props);
+        this.service = new ActorService();
         this.state = {
             popularActors: null,
             loading: true
         }
     }
 
-    async componentDidMount() {
-        let service = new ActorService();
-        await service.getPopularActors()
-            .then(result => {
-                this.setState({
-                    popularActors: result,
-                    loading:false
-                })
-                console.log(this.state.popularActors)
-            })
+     async componentDidMount() {
+         await setTimeout(()=>{
+             this.service.getPopularActors()
+                 .then(result => {
+                     this.setState({
+                         popularActors: result,
+                         loading:false
+                     })
+                     //console.log(this.state.popularActors)
+                 })
+                 .then(()=>{
+                     this.setState({
+                         loading:false
+                     })
+                 })
+         }, 1000)
     }
 
     render() {
         if(this.state.loading){
-            return <h1>Loading</h1>
+            return(
+                <div>
+                    <SkeletonCardList title="popular actors" />
+                </div>
+            )
         }
         else {
             return (

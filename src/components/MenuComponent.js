@@ -1,10 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import avatar from '../assets/img/avatar.png';
+import {useLocation} from 'react-router-dom';
 
 //TODO: Add Active class for the current active route
 
 const  MenuComponent= function(props) {
+    let location = useLocation();
+    console.log(location.pathname)
+    let trendStyle,showStyle,actorStyle = "hover:text-orange-500 hover:font-semibold";
+    switch(location.pathname){
+        case "/shows":
+            showStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
+            break;
+        case "/trending":
+            trendStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
+            break
+        case "/actors":
+            actorStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
+            break
+    }
     return(
         <nav className="border-b border-gray-800">
             <div className="container mx-auto flex items-center justify-between px-4 py-6">
@@ -15,13 +30,13 @@ const  MenuComponent= function(props) {
                     </Link>
                 </li>
                  <li className="md:ml-16 mt-3 md:mt-0">
-                     <Link to="/trending" className="hover:text-orange-500 hover:font-semibold">Trending</Link>
+                     <Link to="/trending" className={trendStyle}>Trending</Link>
                  </li>
                 <li className="md:ml-6 mt-3 md:mt-0">
-                    <Link to="/shows" className="hover:text-orange-500 hover:font-semibold">TV Shows</Link>
+                    <Link to="/shows" className={showStyle}>TV Shows</Link>
                 </li>
                 <li className="md:ml-6 mt-3 md:mt-0">
-                    <Link to="/actors" className="hover:text-orange-500 hover:font-semibold">Actors</Link>
+                    <Link to="/actors" className={actorStyle}>Actors</Link>
                 </li>
              </ul>
              <div className="flex items-center">
