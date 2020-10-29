@@ -11,13 +11,13 @@ export  default function PageLoading () {
                         <Skeleton className="w-64 lg:w-96" duration={1} width={280} height={400} />
                     </div>
                     <div className="md:ml-24">
-                        <Skeleton height={60} width={400} duration={1} />
+                        <Skeleton height={60} width={600} duration={1} />
                         <div className="flex flex-wrap items-center text-gray-400 text-sm">
 
                         </div>
 
                         <p className="text-gray-300 mt-4">
-                            <Skeleton width={400} height={280} />
+                            <Skeleton width={700} height={280} />
                         </p>
 
 

@@ -6,7 +6,7 @@ export default class ActorService {
 
     async getPopularActors(page = 1){
         let url =`${base_url}person/popular`;
-        console.log(url)
+        //console.log(url)
         let params = {
             api_key:api_key,
             page:page

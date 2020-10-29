@@ -10,24 +10,12 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import ShowDetailPage from "./pages/ShowDetailPage";
 import SeasonDetailPage from "./pages/SeasonDetailPage";
 import EpisodeDetailPage from "./pages/EpisodeDetailPage";
-import NewPage from "./pages/NewPage";
 
-//TODO: Add Shimmer/skeleton loader loading indicator
-
-class App extends  React.Component{
-  constructor() {
-    super();
-    this.state = {
-      movieList: null
-    }
-  }
-  componentDidMount(){}
-  render(){
+export default function App(){
     return (
         <div>
           <MenuComponent/>
           <Switch>
-            <Route path="/new" component={NewPage} />
             <Route path="/movie/:movieId" component={MovieDetailPage} />
             <Route path="/trending" component={TrendingPage} />
             <Route path="/shows/:showId/season/:seasonId/episode/:episodeId" component={EpisodeDetailPage} />
@@ -39,7 +27,4 @@ class App extends  React.Component{
           </Switch>
         </div>
     );
-  }
 }
-
-export default App;

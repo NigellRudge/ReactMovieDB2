@@ -6,14 +6,17 @@ import {useLocation} from 'react-router-dom';
 //TODO: Add Active class for the current active route
 
 const  MenuComponent= function(props) {
+    window.scrollTo(0,0);
     let location = useLocation();
-    console.log(location.pathname)
     let trendStyle,showStyle,actorStyle = "hover:text-orange-500 hover:font-semibold";
     switch(location.pathname){
         case "/shows":
             showStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
             break;
         case "/trending":
+            trendStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
+            break
+        case "/":
             trendStyle = "bg-orange-500 rounded px-2 py-2 mt-1 text-black font-semibold"
             break
         case "/actors":
