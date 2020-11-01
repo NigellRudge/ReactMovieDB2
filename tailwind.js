@@ -23,6 +23,7 @@ module.exports = {
       white: '#fff',
 
       gray: {
+        110:'#171212',
         100: '#f7fafc',
         200: '#edf2f7',
         300: '#e2e8f0',
@@ -43,6 +44,9 @@ module.exports = {
         700: '#c53030',
         800: '#9b2c2c',
         900: '#742a2a',
+        1000: '#eb0000',
+        1010: '#cc0000',
+        1020: 'm#800000'
       },
       orange: {
         100: '#fffaf0',
@@ -213,7 +217,7 @@ module.exports = {
       xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-      outline: '0 0 0 3px rgba(237, 137, 54, 1)',
+      outline: '0 0 0 3px rgba(255, 51, 51, 1)',
       none: 'none',
     },
     container: {},

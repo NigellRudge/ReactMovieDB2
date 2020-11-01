@@ -3,13 +3,13 @@ import MenuComponent from "../components/MenuComponent";
 import {MediaContainer} from "../components/MediaContainer";
 import {api_key, MEDIA_TYPES} from "../utils/config";
 import SkeletonCardList from "../components/SkeletonCardList";
-import BrowseService from "../services/BrowseService";
+import Browse from "../data/Browse";
 import PaginationComponent from "../components/PaginationComponent";
 
 export default  class BrowsePage extends Component {
     constructor(props) {
         super(props);
-        this.browseService =new BrowseService();
+        this.browseService =new Browse();
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.createGenreDropdowns = this.createGenreDropdowns.bind(this);
         this.state = {

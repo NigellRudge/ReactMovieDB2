@@ -4,18 +4,18 @@ import MovieCard from "./MovieCard";
 import ShowCard from "./ShowCard";
 import ActorCard from "./ActorCard";
 
-const MediaContainer = function(props){
+const MediaContainer = function({item,max_width,type}){
     let component = "";
-    let max_width = props.max_width?props.max_width:null
-    switch (props.type) {
+    let width = max_width?max_width:null
+    switch (type) {
         case MEDIA_TYPES.MOVIE:
-            component = <MovieCard movie={props.item} max_width={max_width}/>
+            component = <MovieCard movie={item} max_width={width} showGenres={true}/>
             break;
         case MEDIA_TYPES.SHOW:
-            component = <ShowCard show={props.item} max_width={max_width} />
+            component = <ShowCard show={item} max_width={width} />
             break;
         case MEDIA_TYPES.ACTOR:
-            component = <ActorCard actor={props.item} />
+            component = <ActorCard actor={item} />
             break;
         default:
             component = <div>NO type Selected</div>;

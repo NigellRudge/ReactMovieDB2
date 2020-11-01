@@ -3,8 +3,8 @@ import {TrailerComponent} from "../components/TrailerComponent";
 import {CrewComponent} from "../components/CewComponent";
 import {CastComponent} from "../components/CastComponent";
 import {ImagesComponent} from "../components/ImagesComponent";
-import ShowService from "../services/ShowService";
 import PageLoading from "../components/PageLoading";
+import {getEpisodeInfo} from "../data/Shows";
 
 export default  function EpisodeDetailPage({match}){
     const [loading,setLoading] = useState(true)
@@ -12,11 +12,10 @@ export default  function EpisodeDetailPage({match}){
     const [seasonId] = useState(match.params.seasonId)
     const [episodeId] = useState(match.params.episodeId)
     const [episode,setEpisode] = useState({})
-    const service = new ShowService();
 
     useEffect(()=>{
         setLoading(true)
-        service.getEpisodeInfo(showId, seasonId,episodeId)
+        getEpisodeInfo(showId, seasonId,episodeId)
             .then(result => {
                setEpisode(result)
             })

@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import GenreList from "./GenreList";
+import {limitArray} from "../utils/functions";
 
-const MovieCard = function ({movie,max_width}){
-    let length = movie.genre_ids.length >= 3 ? 3: movie.genre_ids.length
+const MovieCard = function ({movie,max_width,showGenres}){
     let url = `/movie/${movie.id}`;
-    movie.genre_ids = movie.genre_ids.slice(0,length);
+    movie.genre_ids = limitArray(movie.genre_ids,4)
+    //console.log(movie.genre_ids)
     let imgClass = 'rounded hover:shadow-outline  transition ease-in-out duration-150';
     if(max_width != null) {
         imgClass = `${imgClass} w-${max_width}`;
@@ -30,8 +31,10 @@ const MovieCard = function ({movie,max_width}){
                     <span className="mx-2">|</span>
                     <span>{movie.release_date} </span>
                 </div>
-                <GenreList genres={movie.genre_ids} type={2} />
-            </div>
+                {showGenres &&
+                <GenreList genres={movie.genre_ids} type={2}/>
+                }
+                </div>
         </div>
     );
 }

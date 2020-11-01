@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ShowService from '../services/ShowService';
+import {getNowAiringShows, getTopRatedShows} from '../data/Shows';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
 import SkeletonCardList from "../components/SkeletonCardList";
@@ -12,14 +12,13 @@ export default function ShowsHomePage (props){
 
 
     useEffect(()=>{
-        let service = new ShowService();
         setTimeout(()=>{
-            service.getNowAiringShows()
+            getNowAiringShows()
                 .then(result => {
                     setNowAiring(result)
                 })
                 .then(()=>{
-                    service.getTopRatedShows()
+                    getTopRatedShows()
                         .then(result => {
                             setTopRated(result)
                         })
@@ -42,7 +41,7 @@ export default function ShowsHomePage (props){
         return(
                 <div className="container mx-auto px-4 pt-10">
                     <div className="popular-movies">
-                        <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">
+                        <h2 className="uppercase tracking-wider text-gray-100 text-lg font-bold">
                             Popular Shows
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -55,7 +54,7 @@ export default function ShowsHomePage (props){
 
 
                     <div className="popular-movies py-24">
-                        <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">
+                        <h2 className="uppercase tracking-wider text-gray-100 text-lg font-bold">
                             Now Airing
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">

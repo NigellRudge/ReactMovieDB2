@@ -1,9 +1,8 @@
 import {limitArray} from "../utils/functions";
 import React from "react";
 
-const CrewComponent = function(props){
-    let crewCount = 4;
-    let crewArray = limitArray(props.crew,crewCount)
+const CrewComponent = function({crew}){
+    const crewArray = limitArray(crew,4)
     return <div className="mt-12">
         <h4 className="text-white font-semibold">Featured Crew</h4>
         <div className="flex mt-4">

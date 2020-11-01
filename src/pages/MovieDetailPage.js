@@ -1,5 +1,5 @@
-import React, {Component, useEffect, useState} from "react";
-import MovieService from "../services/MovieService";
+import React, {useEffect, useState} from "react";
+import  {getMovieInfo, getSimilarMovies} from "../data/Movies";
 import {SimilarItemsComponent} from "../components/SimilarItemsComponent";
 import {ImagesComponent} from "../components/ImagesComponent";
 import {CastComponent} from "../components/CastComponent";
@@ -9,20 +9,18 @@ import GenreList from "../components/GenreList";
 import PageLoading from "../components/PageLoading";
 
 export default function MovieDetailPage({match}){
-    const service = new MovieService();
     const [loading,setLoading] = useState(true);
-    const [movieId,setMovieId] = useState(match.params.movieId)
     const [movie,setMovie] = useState({})
     const [similarMovies,setSimilarMovies] = useState([])
 
     useEffect(()=>{
         setLoading(true)
         setTimeout(()=>{
-            service.getMovieInfo(match.params.movieId)
+            getMovieInfo(match.params.movieId)
                 .then(result => {
                     setMovie(result)
                 }).then(()=>{
-                    service.getSimilarMovies(match.params.movieId)
+                    getSimilarMovies(match.params.movieId)
                         .then(result =>{
                             setSimilarMovies(result)
                         }).then(()=>{

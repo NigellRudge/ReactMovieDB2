@@ -1,12 +1,11 @@
-import React, {Component, useEffect, useState} from "react";
-import ShowService from "../services/ShowService";
+import React, { useEffect, useState} from "react";
 import {TrailerComponent} from "../components/TrailerComponent";
 import {EpisodeComponent} from "../components/EpisodeComponent";
 import PageLoading from "../components/PageLoading";
+import {getSeasonInfo} from "../data/Shows";
 
 
 export default function SeasonDetailPage ({match}){
-    const service = new ShowService();
     const [season,setSeason] = useState({})
     const [loading,setLoading] = useState(true)
     const [showId] = useState(match.params.showId)
@@ -16,7 +15,7 @@ export default function SeasonDetailPage ({match}){
     useEffect(()=>{
         setLoading(true)
         setTimeout(()=>{
-            service.getSeasonInfo(showId,seasonId)
+            getSeasonInfo(showId,seasonId)
                 .then(result => {
                    setSeason(result)
                 })

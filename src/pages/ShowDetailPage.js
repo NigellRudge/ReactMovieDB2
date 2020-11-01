@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from "react";
-import ShowService from "../services/ShowService";
 import {CastComponent} from "../components/CastComponent";
 import {ImagesComponent} from "../components/ImagesComponent";
 import {SimilarItemsComponent} from "../components/SimilarItemsComponent";
@@ -7,6 +6,8 @@ import {TrailerComponent} from "../components/TrailerComponent";
 import {CrewComponent} from "../components/CewComponent";
 import {SeasonsComponent} from "../components/SeasonsComponent";
 import PageLoading from "../components/PageLoading";
+import GenreList from "../components/GenreList";
+import {getShow, getSimilarShows} from "../data/Shows";
 
 export default function ShowDetailPage (props){
     const [show,setShow] = useState({})
@@ -15,16 +16,15 @@ export default function ShowDetailPage (props){
 
 
     const fetchData = async ()=>{
-        let service = new ShowService();
         await setTimeout(()=>{
-            service.getShow(props.match.params.showId)
+            getShow(props.match.params.showId)
                 .then(result => {
                     console.log('Loading show')
                     console.log(result)
                     setShow(result)
                 })
                 .then(()=>{
-                    service.getSimilarShows(props.match.params.showId)
+                    getSimilarShows(props.match.params.showId)
                         .then(result => {
                             setSimilarShows(result)
                         })
@@ -70,13 +70,7 @@ export default function ShowDetailPage (props){
                                 <span className="mx-2">|</span>
                                 <span>{show.first_air_date}</span>
                                 <span className="mx-2">|</span>
-                                { show.genres.map((item,key)=>{
-                                    if(show.genres[key+1]){
-                                        return <span className="mx-1" key={key}>{item.name}, </span>
-                                    }
-                                    return <span className="mx-1" key={key}>{item.name} </span>
-                                })
-                                }
+                                <GenreList genres={show.genres} type={1}/>
                             </div>
 
                             <p className="text-gray-300 mt-8">

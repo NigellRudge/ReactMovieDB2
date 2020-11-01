@@ -3,8 +3,6 @@ import {SkeletonTheme} from "react-loading-skeleton";
 import SkeletonCard from "./SkeletonCard";
 
 export default function SkeletonCardList({title}) {
-    let data = Array(20).fill();
-
     return (
         <SkeletonTheme color="#aaabad" highlightColor="#f5f4f2" >
             <div className="container mx-auto px-4 pt-10">
@@ -13,7 +11,7 @@ export default function SkeletonCardList({title}) {
                         {title}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                        {data.map((movie,key) =>{
+                        {Array(20).fill().map((movie,key) =>{
                                 return <SkeletonCard  key={key}/>
                             }
                         )}

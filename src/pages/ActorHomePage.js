@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ActorService from "../services/ActorService";
+import {getPopularActors} from "../data/Actors";
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
 import SkeletonCardList from "../components/SkeletonCardList";
@@ -8,11 +8,9 @@ export default function ActorHomePage(props) {
     const [loading,setLoading] = useState(true)
     const [popularActors,setActors] = useState([])
 
-
-
     useEffect(()=>{
         setTimeout(()=>{
-            new ActorService().getPopularActors()
+           getPopularActors()
                 .then(result => {
                     setActors(result)
                 })

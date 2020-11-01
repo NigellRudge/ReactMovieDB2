@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import MovieService from '../services/MovieService';
+import {getNowPlayingMovies} from '../data/Movies';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
-import ShowService from "../services/ShowService";
+import {getNowAiringShows} from "../data/Shows";
 import SkeletonCardList from "../components/SkeletonCardList";
 
 export default function TrendingPage(){
@@ -12,10 +12,10 @@ export default function TrendingPage(){
 
     useEffect(()=>{
         setTimeout(()=>{
-            new MovieService().getNowPlayingMovies().then(result => {
+            getNowPlayingMovies().then(result => {
                 setNowPlayingMovies(result)
             }).then(()=>{
-                new ShowService().getNowAiringShows().then(result => {
+                getNowAiringShows().then(result => {
                     setNowAiringShows(result)
                 }).then(()=>{
                     setLoading(false)
@@ -36,7 +36,7 @@ export default function TrendingPage(){
         <div>
             <div className="container mx-auto px-4 pt-10">
                 <div className="popular-movies">
-                    <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">
+                    <h2 className="uppercase tracking-wider text-gray-100 text-lg font-bold">
                         Now Playing
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -48,7 +48,7 @@ export default function TrendingPage(){
                 </div>
 
                 <div className="popular-movies py-24">
-                    <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">
+                    <h2 className="uppercase tracking-wider  text-gray-100 text-lg font-bold">
                         Now Airing
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
