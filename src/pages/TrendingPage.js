@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {getNowPlayingMovies} from '../data/Movies';
+import {getMovieGenres, getNowPlayingMovies} from '../data/Movies';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
-import {getNowAiringShows} from "../data/Shows";
+import {getNowAiringShows, getShowGenres} from "../data/Shows";
 import SkeletonCardList from "../components/SkeletonCardList";
+import {populateGenreArray} from "../utils/functions";
 
 export default function TrendingPage(){
     const [loading,setLoading] = useState(true);
@@ -12,15 +13,29 @@ export default function TrendingPage(){
 
     useEffect(()=>{
         setTimeout(()=>{
-            getNowPlayingMovies().then(result => {
-                setNowPlayingMovies(result)
-            }).then(()=>{
-                getNowAiringShows().then(result => {
-                    setNowAiringShows(result)
-                }).then(()=>{
-                    setLoading(false)
+            getMovieGenres()
+                .then(movieGenres =>{
+                    getNowPlayingMovies().then(result => {
+                        let data = result.map(item =>{
+                            item.genre_ids = populateGenreArray(item.genre_ids,movieGenres)
+                            return item;
+                        })
+                        setNowPlayingMovies(data)
+                    }).then(()=>{
+                        getNowAiringShows().then(result => {
+                            getShowGenres()
+                                .then(showGenres =>{
+                                    let data = result.map(item =>{
+                                        item.genre_ids = populateGenreArray(item.genre_ids,showGenres)
+                                        return item;
+                                    })
+                                    setNowAiringShows(data)
+                                })
+                        }).then(()=>{
+                            setLoading(false)
+                        })
+                    })
                 })
-            })
         },1200)
     },[])
 

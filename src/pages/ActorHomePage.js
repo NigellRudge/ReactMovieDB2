@@ -32,7 +32,7 @@ export default function ActorHomePage(props) {
         return (
             <div className="container mx-auto px-4 pt-16">
                 <div className="popular-actors">
-                    <h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">Popular actors</h2>
+                    <h2 className="uppercase tracking-wider text-xl text-gray-200 text-lg font-bold">Popular actors</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {popularActors.map((actor,key)=>{
                             return <MediaContainer type={MEDIA_TYPES.ACTOR} item={actor} key={key}/>

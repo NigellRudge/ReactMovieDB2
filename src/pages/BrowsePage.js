@@ -77,8 +77,6 @@ export default  class BrowsePage extends Component {
         }
     }
 
-
-
     createGenreDropdowns(){
         const {type} = this.state;
         let items = [];

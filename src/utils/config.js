@@ -17,6 +17,10 @@ const IMAGESIZES = {
     NORMAL:{
         key:3,
         value: 'w500'
+    },
+    LARGE: {
+        key:4,
+        value: 'w1280'
     }
 }
 

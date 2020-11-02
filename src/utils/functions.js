@@ -24,13 +24,11 @@ const getShortCode = function (input,property,char,type=ARRAYTYPE,replace=null) 
             if(input[i][property] !== null){
                 if(replace !== null){
                     input[i][replace] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
-
                 }
                 else {
                     input[i][property] = input[i][property] >= 10 ? `${char}${input[i][property]}`:`${char}0${input[i][property]}`;
                     console.log(`${i}:${input[i][property] }`);
                 }
-
             }
             else {
                 if(replace !== null){
@@ -75,6 +73,7 @@ const appendMediaUrl = function(input, property, type = ARRAYTYPE, size=IMAGESIZ
                 return output;
             }
         output = `${getMediaUrl(size)}${input[property]}`;
+            console.log(output)
     }
     return output;
 }

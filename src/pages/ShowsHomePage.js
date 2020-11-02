@@ -1,31 +1,45 @@
 import React, {useEffect, useState} from 'react';
-import {getNowAiringShows, getTopRatedShows} from '../data/Shows';
+import {getNowAiringShows, getShowGenres, getTopRatedShows} from '../data/Shows';
 import {MediaContainer} from "../components/MediaContainer";
 import {MEDIA_TYPES} from "../utils/config";
 import SkeletonCardList from "../components/SkeletonCardList";
+import {populateGenreArray} from "../utils/functions";
 
 export default function ShowsHomePage (props){
 
     const [loading,setLoading] = useState(true);
     const [nowAiringShows,setNowAiring] = useState([]);
     const [topRatedShows,setTopRated] = useState([]);
+    const [showGenres,setGenres] = useState([]);
 
 
     useEffect(()=>{
         setTimeout(()=>{
-            getNowAiringShows()
-                .then(result => {
-                    setNowAiring(result)
-                })
-                .then(()=>{
-                    getTopRatedShows()
+            getShowGenres()
+                .then(genres =>{
+                    getNowAiringShows()
                         .then(result => {
-                            setTopRated(result)
+                            let data = result.map(item =>{
+                                item.genre_ids = populateGenreArray(item.genre_ids,genres)
+                                return item;
+                            })
+                            setNowAiring(data)
                         })
                         .then(()=>{
-                            setLoading(false)
+                            getTopRatedShows()
+                                .then(result => {
+                                    let data = result.map(item =>{
+                                        item.genre_ids = populateGenreArray(item.genre_ids,genres)
+                                        return item;
+                                    })
+                                    setTopRated(data)
+                                })
+                                .then(()=>{
+                                    setLoading(false)
+                                });
                         });
-                });
+                })
+
         },1200)
     },[])
 

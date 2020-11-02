@@ -6,6 +6,7 @@ import {months} from "../utils/config";
 
 const ShowCard = function({show,max_width}) {
     let url = `/shows/${show.id}`
+    //console.log(show.genre_ids)
     show.genre_ids = limitArray(show.genre_ids,3)
     let imgClass = 'rounded hover:shadow-outline  transition ease-in-out duration-150';
     if(max_width != null) {

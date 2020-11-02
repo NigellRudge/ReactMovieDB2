@@ -65,7 +65,7 @@ export const getActorRoles = async(actorId)=>{
         .then(response =>{
             console.log(url)
             //console.log(response.data.cast)
-            response.data.cast = appendMediaUrl(limitArray(response.data.cast,5),'poster_path',ARRAYTYPE)
+            response.data.cast = appendMediaUrl(limitArray(response.data.cast),'poster_path',ARRAYTYPE)
             console.log(response.data.cast)
             return response.data.cast
         })
