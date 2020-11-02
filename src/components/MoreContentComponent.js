@@ -6,7 +6,7 @@ const MoreContentComponent = function({active,moreUrl}){
         return <div></div>;
     }
     return <div className="text-4xl font-semibold">
-        <Link className="hover:text-orange-500 hover:underline" to={moreUrl}>
+        <Link className="hover:text-red-1010 hover:underline" to={moreUrl}>
             More+
         </Link>
     </div>

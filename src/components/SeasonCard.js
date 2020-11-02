@@ -10,9 +10,9 @@ const SeasonCard = function ({season,showId}) {
                 <img src={season.poster_path} alt="@season.name" className="hover:shadow-outline rounded transition ease-in-out duration-150" />
             </Link>
             <div className="mt-2">
-                <Link to={url} className="text-lg mt-2 hover:text-gray:300">{season.name}</Link>
+                <Link to={url} className="text-lg mt-2 hover:text-red-1010 hover:font-semibold transition ease-in-out duration-150">{season.name}</Link>
                 <div className="text-sm text-gray-400">
-                    <span className="text-lg font-semibold text-orange-500">
+                    <span className="text-lg font-semibold">
                         {seasonNumber}
                     </span>
                 </div>

@@ -56,14 +56,14 @@ export default function ShowDetailPage (props){
     }
     return (
         <div>
-            <img alt="movie_cover" src={show.backdrop_path} className="w-full h-auto object-cover" style={style} />
+            <img alt="movie_cover" src={show.backdrop_path} className="w-full h-auto object-cover object-top" style={style} />
             <div className="border-b border-gray-800 ">
-                <div className="bg-black absolute left-0 w-full top-0 bg-opacity-75 mt-20 pt-24 pb-12 pl-12 pr-12" style={{height:'601px'}}>
+                <div className="bg-black absolute left-0 w-full top-0 bg-opacity-75 mt-20 pt-24 pb-12 pl-48 pr-12" style={{height:'601px'}}>
                     <div className="flex flex-col md:flex-row" >
                     <div className="flex-none">
                         <img src={show.poster_path} alt="poster"  className="w-64 lg:w-96" />
                     </div>
-                    <div className="md:ml-24">
+                    <div className="md:ml-24 container w-2/3 px-auto">
                         <h2 className="text-4xl mt-4 md:mt-0 font-semibold">{show.original_name}</h2>
                         <div className="flex flex-wrap items-center text-gray-400 text-sm">
                             <svg className="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
@@ -73,9 +73,9 @@ export default function ShowDetailPage (props){
                                         data-name="star"/>
                                 </g>
                             </svg>
-                            <span className="ml-1">{show.vote_average}</span>
+                            <span className="ml-1 font-semibold">{show.vote_average}</span>
                             <span className="mx-2">|</span>
-                            <span>{show.first_air_date}</span>
+                            <span className=" font-semibold">{show.first_air_date}</span>
                             <span className="mx-2">|</span>
                             <GenreList genres={show.genres} type={1}/>
                         </div>

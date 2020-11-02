@@ -10,8 +10,8 @@ const MovieCastCard = function({actor}) {
                      className="hover:shadow-outline rounded transition ease-in-out duration-150" />
             </Link >
             <div className="mt-2">
-                <Link to={url} className="hover:text-orange-500 transition duration-200 ease-in-out hover:font-semibold">{actor.name}</Link>
-                <div className="font-semibold text-orange-400">
+                <Link to={url} className="hover:text-red-1010 transition duration-200 ease-in-out hover:font-semibold">{actor.name}</Link>
+                <div className="font-semibold text-lg text-gray-200">
                     {actor.character}
                 </div>
             </div>

@@ -23,16 +23,11 @@ export const getPopularActors = async(page=1) => {
 
 export const getActorInfo = async(actorId) => {
     let url = `${base_url}person/${actorId}`;
-    let params = {
-        api_key:api_key,
-        append_to_response:'images,credits'
-    }
+    params.append_to_response ='images,credits'
     return await axios.get(url,{params:params })
         .then(response => {
-            //console.log(response)
             response.data.profile_path = appendMediaUrl(response.data,'profile_path',SINGLETYPE)
             response.data.images.profiles = appendMediaUrl(response.data.images.profiles ,'file_path',ARRAYTYPE)
-            //console.log(response.data.images.profiles )
             return response.data
         })
         .catch(error => {
@@ -42,10 +37,7 @@ export const getActorInfo = async(actorId) => {
 
 export const searchActors = async(query,page=1)=>{
     let url = `${base_url}/search/person`;
-    let params = {
-        api_key:api_key,
-        query:query
-    }
+    params.query = query
     return await axios.get(url,{params:params})
         .then(response => {
             response.data.results = appendMediaUrl(response.data.results,'profile_path', ARRAYTYPE);
@@ -58,13 +50,9 @@ export const searchActors = async(query,page=1)=>{
 
 export const getActorRoles = async(actorId)=>{
     let url = `${base_url}person/${actorId}/movie_credits`;
-    let params = {
-        api_key:api_key,
-    }
     return await axios.get(url,{params:params})
         .then(response =>{
             console.log(url)
-            //console.log(response.data.cast)
             response.data.cast = appendMediaUrl(limitArray(response.data.cast),'poster_path',ARRAYTYPE)
             console.log(response.data.cast)
             return response.data.cast

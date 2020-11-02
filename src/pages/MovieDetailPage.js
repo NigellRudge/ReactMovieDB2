@@ -49,9 +49,9 @@ export default function MovieDetailPage({match}){
     }
     return(
         <div>
-            <img alt="movie_cover" src={movie.backdrop_path} className="w-full h-auto object-cover" style={style} />
-            <div className="border-b border-gray-800 ">
-                <div className="bg-black absolute left-0 w-full top-0 bg-opacity-75 mt-20 pt-24 pb-12 pl-12 pr-12"  style={{height:'601px'}}>
+            <img alt="movie_cover" src={movie.backdrop_path} className="w-full h-auto object-cover object-top" style={style} />
+            <div className="">
+                <div className="bg-black absolute left-0 w-full top-0 bg-opacity-85 mt-20 pt-24 pb-12 pl-12 pr-12"  style={{height:'601px'}}>
                     <div className="flex flex-col md:flex-row" >
                         <div className="flex-none">
                             <img src={movie.poster_path} alt="poster" className="w-64 lg:w-96" />
